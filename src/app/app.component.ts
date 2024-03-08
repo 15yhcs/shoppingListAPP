@@ -7,4 +7,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shoppingListApp';
+  eventChoice: string;
+  constructor(){
+
+  }
+
+  ngOnInit(){
+
+  }
+
+  changePage(event: string){
+    this.eventChoice = event;
+    console.log("hey");
+    
+  }
+
 }

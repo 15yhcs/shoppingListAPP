@@ -15,4 +15,8 @@ export class ShoppingListComponent {
   ngOnInit(){
 
   }
+
+  addToIngreList(e){
+    this.ingredients = [...this.ingredients, new Ingredients(e.name, e.amount)]
+  }
 }
