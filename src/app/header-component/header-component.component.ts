@@ -7,13 +7,16 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class HeaderComponentComponent {
   listClicked: string;
+  collapse: boolean = false;
   @Output('liClicked') clickedList = new EventEmitter<string>();
+  dpItems: String[] = ["Action", "Action1", "Action2"]
   constructor(){
 
   }
 
   ngOnInit(){
-
+    console.log(this.collapse);
+    
   }
 
   clickItem(event){
