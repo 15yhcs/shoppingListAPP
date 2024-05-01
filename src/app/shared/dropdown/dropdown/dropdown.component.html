@@ -1,5 +1,5 @@
 <ul class="dropdown-content">
-    <a *ngFor="let item of dropDownItem">
+    <a *ngFor="let item of dropDownItem" style="cursor: pointer;" (click)="clickActions(item)">
         {{item}}
     </a>
 </ul>

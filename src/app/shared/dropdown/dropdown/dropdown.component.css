@@ -20,6 +20,15 @@
     text-decoration: none;
     display: block;
 }
+
+.dropdown-content a:hover{
+    border-style: solid;
+}
+
 ul {
     padding-inline-start: 10px;
+}
+
+cursor {
+    
 }
