@@ -1,0 +1,11 @@
+<div class="container">
+  <app-header-component (liClicked)="changePage($event)"></app-header-component>
+
+  
+  <div class="row">
+    <div class="col-md-12">
+      <app-recipes *ngIf="eventChoice=='Recipes'"></app-recipes>
+      <app-shopping-list *ngIf="eventChoice=='Shopping List'"></app-shopping-list>
+    </div>
+  </div>
+</div>

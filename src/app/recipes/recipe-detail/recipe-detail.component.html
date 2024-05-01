@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-xs-12">
+        <img src='{{recipeCur.imagePath}}' alt="Wat" class="img-responsive">
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h1>{{recipeCur.name}}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="btn-group">
+            <button (click)="collapse = !collapse" class="btn btn-primary dropdown-toggle">
+                manage recipe
+                <span class="caret"></span>
+            </button>
+            <app-dropdown *appDropdown="collapse" class="dropdown-content" [dropDownItem] = "dpItems" [pInput]="this"></app-dropdown>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {{recipeCur.description}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {{recipeCur.ingrediants}}
+    </div>
+</div>
