@@ -11,15 +11,11 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="btn-group">
-            <button class="btn btn-primary dropdown-toggle">
+            <button (click)="collapse = !collapse" class="btn btn-primary dropdown-toggle">
                 manage recipe
                 <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu">
-                <li href="">Add ingrediant</li>
-                <li href="">Edit ingrediant</li>
-                <li href="">Delete ingrediant</li>
-            </ul>
+            <app-dropdown *appDropdown="collapse" class="dropdown-content" [dropDownItem] = "dpItems" [pInput]="this"></app-dropdown>
         </div>
     </div>
 </div>
