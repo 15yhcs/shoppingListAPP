@@ -1,7 +1,8 @@
 <a 
-    href="#"
-    (click)="sendItemDetails()"
-    class="list-group-item clearfix">
+    class="list-group-item clearfix"
+    routerLinkActive="active"
+    [routerLink]="[receipeChild.id]"
+    [queryParams]="{id: receipeChild.id}">
     <div class="pull-left">
         <h4 class="list-group-item-heading">{{receipeChild.name}}</h4>
         <p class="list-group-item-text">{{receipeChild.description}}</p>
@@ -10,3 +11,6 @@
         <img src="{{receipeChild.imagePath}}" alt="" class="img-responsive" style="max-height: 50px;">
     </span>
 </a>
+
+
+<!-- (click)="sendItemDetails() -->

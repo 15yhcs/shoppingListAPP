@@ -1,16 +1,21 @@
-import { Component, DoCheck, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, DoCheck, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { shoppingListService } from '../../service/shoppingListService';
 import { RecipeDetailComponent } from '../../../recipes/recipe-detail/recipe-detail.component';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { recipeListService } from '../../service/recipeService';
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.css'
 })
-export class DropdownComponent implements DoCheck{
+export class DropdownComponent implements DoCheck, OnInit, OnDestroy{
   @Input() dropDownItem: String[];
   @Input("pInput") parent: RecipeDetailComponent;
-  constructor(private spSvc: shoppingListService){
-    
+  editSub: Subscription;
+  editPermission: Boolean;
+  constructor(private spSvc: shoppingListService, private route: ActivatedRoute, private router: Router, private rcSvc: recipeListService){
+  
   }
 
   ngDoCheck(){
@@ -18,12 +23,33 @@ export class DropdownComponent implements DoCheck{
     
   }
 
+  ngOnInit(): void {
+    
+  }
+
+  ngOnDestroy(): void {
+    
+  }
+
   clickActions(item){
-    console.log(item);
+    console.log(this.parent);
     
     if(item === "Add ingrediant"){
-      this.spSvc.addToIngreList({name: this.parent.recipeCur.ingrediantsList.name, amount: 3})
-      
+      this.spSvc.addToIngreList({name: this.parent.recipeCur.name, amount: 3})
+    }
+
+    if(item === "Edit ingrediant"){
+      this.route.params.subscribe((param: Params) => {
+        this.editPermission = this.rcSvc.findRecipes(+param.id).id === 1 ? false : true;
+      })
+      if(this.editPermission){
+        this.router.navigate(['edit'], {relativeTo: this.route})
+      }
+      else{
+        this.router.navigate(['.../'], {relativeTo: this.route})
+        console.log("noPermission");
+        
+      }
     }
   }
 }

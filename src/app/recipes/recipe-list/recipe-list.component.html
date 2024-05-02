@@ -6,8 +6,12 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <app-recipe-items *ngFor="let reciep of receipes" [receipeChild]="reciep" (item)="sendItemDetails(reciep)">
+        <app-recipe-items 
+        *ngFor="let reciep of receipes" 
+        [receipeChild]="reciep"
+        >
         </app-recipe-items>
     </div>
 </div>
-
+<!-- 
+(item)="sendItemDetails(reciep)" -->

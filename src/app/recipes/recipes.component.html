@@ -1,9 +1,18 @@
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-5">
         <app-recipe-list (itemDetails)="unloadDetails($event)"></app-recipe-list>
     </div>
     <div class="col-md-7">
         <app-recipe-detail *ngIf="selected; else elseBlock" [recipeCur]="curRecipt"></app-recipe-detail>
         <ng-template #elseBlock> <h1 class="h5">Please select an item</h1> </ng-template>
+    </div>
+</div> -->
+
+<div class="row">
+    <div class="col-md-5">
+        <app-recipe-list></app-recipe-list>
+    </div>
+    <div class="col-md-7">
+        <router-outlet></router-outlet>
     </div>
 </div>
