@@ -2,18 +2,17 @@
     <div class="container-fluid">
       <div class="navbar-header">
         <img class="navbar-brand" src="/assets/img/shopping.jpg" width="50" height="50" alt="">
-        <a class="navbar-brand" href="#">
-            <header>Shopping List App</header>
+        <a class="navbar-brand" href="#" [routerLink]="['']">
+            <header >Shopping List App</header>
         </a>
       </div>
       <ul (click)="clickItem($event)" class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Shopping List</a></li>
-        <li><a href="#">Recipes</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/shoppingList']">Shopping List</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/receipes']">Recipes</a></li>
       </ul>
       <ul class="nav navbar-nav float-right dropdown">
         <li class="nav-item dropdown">
-          <a (click)="collapse = !collapse" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a (click)="collapse = !collapse" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown link
           </a>
         </li>

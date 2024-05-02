@@ -14,6 +14,10 @@ import { DropownDirective } from './shared/dropdown.directive';
 import { DropdownComponent } from './shared/dropdown/dropdown/dropdown.component';
 import { recipeListService } from './shared/service/recipeService';
 import { shoppingListService } from './shared/service/shoppingListService';
+import { AppRoutingModules } from './app-routing.module';
+import { HomePageComponent } from './home-page/home-page.component';
+import { EmptyItemComponent } from './empty-item/empty-item.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,11 +29,15 @@ import { shoppingListService } from './shared/service/shoppingListService';
     ShoppingListComponent,
     ShoppingEditComponent,
     DropownDirective,
-    DropdownComponent
+    DropdownComponent,
+    HomePageComponent,
+    EmptyItemComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModules
   ],
   providers: [
     provideClientHydration(),
