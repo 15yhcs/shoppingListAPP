@@ -1,4 +1,4 @@
-import { Component, Output,EventEmitter } from '@angular/core';
+import { Component, Output,EventEmitter, DoCheck } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredients } from '../../shared/ingredient.modal';
 import { recipeListService } from '../../shared/service/recipeService';
@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './recipe-list.component.html',
   styleUrl: './recipe-list.component.css'
 })
-export class RecipeListComponent {
+export class RecipeListComponent implements DoCheck{
   receipes: Recipe[] = [];
   id: number;
   // @Output() itemDetails = new EventEmitter<{Description: string, Ingre: string}>()
@@ -20,6 +20,10 @@ export class RecipeListComponent {
     this.receipes = this.rcSvc.getRecipes()
   }
 
+  ngDoCheck(): void {
+    this.receipes = this.rcSvc.getRecipes()
+  }
+
   getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
@@ -28,8 +32,8 @@ export class RecipeListComponent {
     console.log(this.route.snapshot);
     
     this.router.navigate(['new'], {relativeTo: this.route});
-    this.id = this.rcSvc.getRecipes().length
-    this.rcSvc.pushRecipes(this.id)
+    // this.id = this.rcSvc.getRecipes().length
+    // this.rcSvc.pushRecipes(this.id)
     this.receipes = this.rcSvc.getRecipes()
   }
 

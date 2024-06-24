@@ -1,1 +1,50 @@
-<p>recipe-edit works!</p>
+<div class="container">
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <form [formGroup]="editRecipeForm" (ngSubmit)="onSubmit()">
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name: </label>
+                <div class="col-sm-10">
+                    <input type="text" id="name" formControlName="name" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="description" class="col-sm-2 col-form-label">Description: </label>
+                <div class="col-sm-10">
+                    <input type="text" id="description" formControlName="description" class="form-control">
+                </div>
+            </div>
+            <!-- <div class="form-group row">
+                <label for="image">Image</label>
+            </div> -->
+            <div class="form-group row">
+                <label for="ingrediants" class="col-sm-2 col-form-label">Ingrediants</label>
+                <div class="col-sm-10">
+                    <input type="text" id="ingrediants" formControlName="ingrediants" class="form-control">
+                </div>
+            </div>
+            <div formGroupName="ingrediantsList" class="row">
+                <div class="form-group col-sm-6 row">
+                    <label for="ingrediantName" class="col-sm-4 col-form-label">Ingrediant Name:</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="ingrediantName" formControlName="ingrediantName" class="ml form-control">
+                        </div>
+                </div>
+                <div class="form-group col-sm-6 row">
+                    <label for="ingrediantAmount" class="col-sm-4 col-form-label">Ingrediant Amt:</label>
+                        <div class="col-sm-8">
+                            <input type="number" id="ingrediantAm" formControlName="ingrediantAmount" class="ml form-control">
+                        </div>
+                </div>
+            </div>
+            <div class="flex justify-content-center">
+                <button type="submit" class="btn btn-primary">Sumbit</button>
+            </div>
+            
+        </form>
+      </div>
+    </div>
+    <hr>
+  </div>
+  

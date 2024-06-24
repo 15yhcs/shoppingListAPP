@@ -18,6 +18,7 @@ import { AppRoutingModules } from './app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { EmptyItemComponent } from './empty-item/empty-item.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModules
+    AppRoutingModules,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),

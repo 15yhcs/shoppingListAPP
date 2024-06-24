@@ -14,6 +14,7 @@ export class DropdownComponent implements DoCheck, OnInit, OnDestroy{
   @Input("pInput") parent: RecipeDetailComponent;
   editSub: Subscription;
   editPermission: Boolean;
+  editContent;
   constructor(private spSvc: shoppingListService, private route: ActivatedRoute, private router: Router, private rcSvc: recipeListService){
   
   }
@@ -41,9 +42,22 @@ export class DropdownComponent implements DoCheck, OnInit, OnDestroy{
     if(item === "Edit ingrediant"){
       this.route.params.subscribe((param: Params) => {
         this.editPermission = this.rcSvc.findRecipes(+param.id).id === 1 ? false : true;
+        this.editContent = this.rcSvc.findRecipes(+param.id);
+        console.log(this.editContent);
+        
       })
       if(this.editPermission){
-        this.router.navigate(['edit'], {relativeTo: this.route})
+        this.router.navigate(['edit'], {
+          relativeTo: this.route,
+          queryParams: {
+            name: this.editContent.name,
+            description: this.editContent.description,
+            ingrediants: this.editContent.ingrediants,
+            ingrediantName: this.editContent.ingrediantsList.name,
+            ingrediantAmount: this.editContent.ingrediantsList.amount,
+            id: this.editContent.id
+          }
+        })
       }
       else{
         this.router.navigate(['.../'], {relativeTo: this.route})
