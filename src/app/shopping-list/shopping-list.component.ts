@@ -19,4 +19,9 @@ export class ShoppingListComponent{
       this.ingredients = e
     })
   }
+
+  loadShoppingList(item){
+    this.spSvc.ingredientEdit(item);
+    
+  }
 }
