@@ -3,15 +3,15 @@
         <form [formGroup]="editShoppingForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-sm-5 form-group">
-                    <label for="name"> Name</label>
+                    <label for="name"> Name(Required)</label>
                     <!-- #EditName for viewchild approach-->
-                    <input type="text" id="name" class="form-control" formControlName="name" #EditName>
+                    <input [(ngModel)]="inputVal" (input)="change($event)" type="text" id="name" class="form-control" formControlName="name" #EditName>
                     <ng-container *ngIf="!this.editShoppingForm.get('name').valid && this.editShoppingForm.get('name').touched">
                         <ng-container [ngTemplateOutlet]="invalidBlock" [ngTemplateOutletContext]="ctx"></ng-container>
                     </ng-container>
                 </div>
                 <div class="col-sm-2 form-group">
-                    <label for="amount"> Amount</label>
+                    <label for="amount"> Amount(Required)</label>
                     <!-- #EditAmount for viewchild approach-->
                     <input type="number" id="amount" class="form-control" formControlName="amount">
                     <ng-container *ngIf="!this.editShoppingForm.get('amount').valid && this.editShoppingForm.get('amount').touched">
@@ -21,9 +21,9 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-success" type="submit">add</button>
-                    <button class="btn btn-danger" type="button" >delete</button>
-                    <button class="btn btn-primary" type="button">clear</button>
+                    <button class="btn btn-success" type="submit" [disabled]="!editShoppingForm.valid">{{addButton}}</button>
+                    <button class="btn btn-danger" type="button" (click)="deleteItem()">delete</button>
+                    <button class="btn btn-primary" type="button" (click)="clearInputs()">clear</button>
                 </div>
             </div>
         </form>
@@ -31,9 +31,9 @@
 </div>
 
 
-<ng-template #invalidBlock let-inputString='labelName'>
+<ng-template #invalidBlock let-inputString='labelName' let-inputVal="val">
     <span class="help-block">
-        please enter a valid {{inputString}}
+        please enter a valid {{inputString}}, value {{inputVal}} is not valid
     </span>
 </ng-template>
 

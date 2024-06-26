@@ -1,3 +1,7 @@
 input.ng-invalid.ng-touched{
     border-color: lightcoral;
 }
+
+input.ng-invalid.ng-untouched.valueLoaded{
+    border-color: lightcoral;
+}

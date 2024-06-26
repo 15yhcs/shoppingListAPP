@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
 import { Ingredients } from '../../shared/ingredient.modal';
 import { shoppingListService } from '../../shared/service/shoppingListService';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -8,14 +8,18 @@ import { of } from 'rxjs';
   templateUrl: './shopping-edit.component.html',
   styleUrl: './shopping-edit.component.css'
 })
-export class ShoppingEditComponent implements OnInit, AfterViewInit {
+export class ShoppingEditComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @ViewChild('EditName', {static: false}) nameRef: ElementRef;
   // @ViewChild('EditAmount', {static: false}) amountRef: ElementRef;
   editShoppingForm : FormGroup;
   newIngredients: Ingredients;
+  addButton: string="add";
+  sub:any;
+  @Input() inputVal: string = "";
   ctx = {
     labelName: 'name',
-    labelAmount: 'amount'
+    labelAmount: 'amount',
+    val: this.inputVal
   }
   constructor(private spSvc: shoppingListService, private renderer: Renderer2){
     
@@ -24,23 +28,34 @@ export class ShoppingEditComponent implements OnInit, AfterViewInit {
   ngOnInit(){
     // console.log(this.nameRef);
     this.editShoppingForm = new FormGroup({
-      'name': new FormControl("", [Validators.required, this.forbiddenName.bind(this)]),
-      'amount': new FormControl("", [Validators.required], this.forbiddenAmount.bind(this))
+      'name': new FormControl(" ", [Validators.required, this.forbiddenName.bind(this)]),
+      'amount': new FormControl(null, [Validators.required], this.forbiddenAmount.bind(this))
     })
   }
 
   ngAfterViewInit(){
-    this.spSvc.ingredientToBeEdited$.subscribe((item) => {
+    this.sub = this.spSvc.ingredientToBeEdited$.subscribe((item) => {
       console.log(item);
       this.editShoppingForm.setValue({
         "name": item.name,
         "amount": item.amount
       })
+      this.addButton = "Edit"
     })
   }
 
-  ngDoCheck(): void {
+  ngOnDestroy(){
+    this.sub.unsubscribe()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes.inputVal);
     
+  }
+
+  change(e: any){
+    this.inputVal = e.target.value;
+    this.ctx.val = this.inputVal
     
   }
 
@@ -55,25 +70,46 @@ export class ShoppingEditComponent implements OnInit, AfterViewInit {
       (<FormGroup>this.editShoppingForm).get('amount').value,
     )
     
-    if(this.editShoppingForm.get("name").status !== "INVALID"){
-      this.spSvc.addToIngreList(this.newIngredients)
+    if(this.editShoppingForm.valid){
+      if(this.spSvc.findIngredient(this.newIngredients.name) != -1){
+        console.log("Shoud be here");
+        
+        this.spSvc.updateIngreList(this.newIngredients)
+      }
+      else{
+        this.spSvc.addToIngreList(this.newIngredients)
+      }
+      this.addButton = "add"
     }
-    console.log(this.editShoppingForm.get("name").status);
-    
+    this.editShoppingForm.reset();
   }
 
   forbiddenName(controls: FormControl){
-    if(controls.value.length > 5){
+    if(!controls.value){
       return {"ss": true};
     }
     return null;
   }
 
   forbiddenAmount(controls: FormControl){
-    if(controls.value > 5){
+    if(controls.value < 0){
+      
       return of({"ss": true});
     }
     return of(null);
+  }
+
+  clearInputs(){
+    this.editShoppingForm.reset();
+    this.addButton = "add"
+  }
+
+  deleteItem(){
+    if(this.spSvc.findIngredient(this.newIngredients.name) != -1){
+      this.spSvc.deleteIngreList(this.newIngredients);
+    }
+    this.editShoppingForm.reset();
+    this.addButton = "add"
   }
 
 }

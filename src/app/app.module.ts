@@ -19,6 +19,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { EmptyItemComponent } from './empty-item/empty-item.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputValueChangeDirective } from './shared/input-value-change.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DropdownComponent,
     HomePageComponent,
     EmptyItemComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    InputValueChangeDirective
   ],
   imports: [
     BrowserModule,

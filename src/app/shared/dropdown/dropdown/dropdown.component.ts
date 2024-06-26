@@ -36,7 +36,7 @@ export class DropdownComponent implements DoCheck, OnInit, OnDestroy{
     console.log(this.parent);
     
     if(item === "Add ingrediant"){
-      this.spSvc.addToIngreList({name: this.parent.recipeCur.name, amount: 3})
+      this.spSvc.addToIngreList({name: this.parent.recipeCur.name, amount: this.parent.recipeCur.name})
     }
 
     if(item === "Edit ingrediant"){
