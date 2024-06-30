@@ -42,4 +42,8 @@ export class recipeListService{
         })
         return findItem
     }
+
+    deleteRecipes(id: number){
+        this.receipes = this.receipes.filter(receipe => receipe.id !== id);
+    }
 }

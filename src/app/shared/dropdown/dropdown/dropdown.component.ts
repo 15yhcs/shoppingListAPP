@@ -36,7 +36,7 @@ export class DropdownComponent implements DoCheck, OnInit, OnDestroy{
     console.log(this.parent);
     
     if(item === "Add ingrediant"){
-      this.spSvc.addToIngreList({name: this.parent.recipeCur.name, amount: this.parent.recipeCur.name})
+      this.spSvc.addToIngreList({name: this.parent.recipeCur.name, amount: this.parent.recipeCur.ingrediantsList.amount})
     }
 
     if(item === "Edit ingrediant"){
@@ -64,6 +64,10 @@ export class DropdownComponent implements DoCheck, OnInit, OnDestroy{
         console.log("noPermission");
         
       }
+    }
+    if(item === "Delete ingrediant"){
+      this.rcSvc.deleteRecipes(this.parent.recipeCur.id)
+      this.router.navigate(['delete'], {relativeTo: this.route})
     }
   }
 }
